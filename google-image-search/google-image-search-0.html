@@ -1,0 +1,26 @@
+<input id="searchText" type="text">
+<input id="searchButton" type="button" value="Search" onclick="googleImageSearchAPI()"><br/>
+<img id="image">
+
+<script>
+document.onkeypress = function (e) {
+  if (!e) e = event;
+  var key = e.charCode || e.keyCode;
+  if (key == 13) googleImageSearchAPI();
+}
+function googleImageSearchAPI(){
+	var text = document.getElementById("searchText").value;
+	var script = document.createElement('script');
+	script.src = "http://ajax.googleapis.com/ajax/services/search/images?callback=cb&q="+text+"&v=1.0";
+	document.head.appendChild(script);
+}
+function cb(d){
+	var image=d.responseData.results[0].url;
+	document.getElementById("image").src=image;
+}
+</script>
+
+<!--
+http://itakanaya9.hatenablog.com/entry/2014/02/05/024342
+https://www.facebook.com/yutaka.kubota1975/posts/10153185019164636
+-->

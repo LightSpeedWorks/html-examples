@@ -1,0 +1,30 @@
+<div id="status">ロード中...</div>
+<img id="image1">
+<img id="image2">
+
+<script>
+var $status = document.getElementById('status');
+var $image1 = document.getElementById('image1');
+var $image2 = document.getElementById('image2');
+
+function searchImage(textToSearch) {
+  $status.innerHTML = word + "を検索中...";
+  var $script = document.createElement('script');
+  $script.src = 'http://ajax.googleapis.com/ajax/services/search/images?callback=cb1&q=' + textToSearch + '&v=1.0';
+  document.head.appendChild($script);
+}
+
+function cb1(data) {
+  $status.innerHTML = word + "の画像をロード";
+  if (data.responseData.results[0]) $image1.src = data.responseData.results[0].url;
+  if (data.responseData.results[1]) $image2.src = data.responseData.results[1].url;
+}
+
+var word = "ラーメン";
+searchImage(word);
+</script>
+
+<!--
+http://itakanaya9.hatenablog.com/entry/2014/02/05/024342
+https://www.facebook.com/yutaka.kubota1975/posts/10153185019164636
+-->
